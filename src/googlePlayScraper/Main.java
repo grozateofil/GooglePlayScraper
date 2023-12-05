@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import googlePlayScraper.entity.Application;
+import googlePlayScraper.entity.Review;
 import googlePlayScraper.util.Utils;
 
 public class Main {
@@ -67,7 +68,7 @@ public class Main {
 							if (appCardData.getText().replace("\n", " ").contains("star")) {
 
 								price = "free";
-							} else {
+							} else if (appCardData.getText().replace("\n", " ").contains("RON")) {
 								price = appCardData.getText().replace("\n", " ");
 							}
 						} else {
@@ -132,11 +133,36 @@ public class Main {
 				}
 
 				chromeDriver.navigate().back();
+				Thread.sleep(2000);
+
+				ArrayList<Review> reviews = new ArrayList<>();
+
+				if (chromeDriver.findElements(By.cssSelector(".Jwxk6d")).size() > 0) {
+					WebElement reviewSection = wait
+							.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".Jwxk6d")));
+
+					List<WebElement> reviewsList = reviewSection.findElements(By.className("EGFGHd"));
+
+					for (WebElement element : reviewsList) {
+
+						String author = element.findElement(By.className("YNR7H")).findElement(By.className("gSGphe"))
+								.findElement(By.className("X5PpBb")).getText();
+						String starsNumber = element.findElement(By.className("Jx4nYe"))
+								.findElement(By.className("iXRFPc")).getAttribute("aria-label").split(" ")[1];
+						String reviewDate = element.findElement(By.className("Jx4nYe"))
+								.findElement(By.cssSelector(".bp9Aid")).getText();
+						String textReview = element.findElement(By.className("h3YV2d")).getText();
+
+						Review review = new Review(author, starsNumber, reviewDate, textReview);
+						reviews.add(review);
+					}
+				}
+
 				chromeDriver.navigate().back();
 				Thread.sleep(2000);
 
-				Application application = new Application(appName, appDeveloperName, appLink, null, null,
-						utils.parseRatingSection(array).getReviewsNumeber(),
+				Application application = new Application(appName, appDeveloperName, appLink, null,
+						reviews.size() > 0 ? reviews : null, utils.parseRatingSection(array).getReviewsNumeber(),
 						utils.parseRatingSection(array).getRating(),
 						utils.parseRatingSection(array).getDownloadsNumber(),
 						utils.parseRatingSection(array).getAgeRating(), price, hashMap);
