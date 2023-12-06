@@ -16,8 +16,9 @@ public class Utils {
 	public void saveInFolder(String searchedWord, ArrayList<Application> applications) {
 
 		String folderName = searchedWord;
-		String message = new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date());
-		File folder = new File(parentFolder + "/" + folderName + "/" + message);
+		String dayFolder = new SimpleDateFormat("ddMMyyyy").format(new Date());
+		String message = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+		File folder = new File(parentFolder + "/" + dayFolder + "/" + folderName);
 		folder.mkdirs();
 		String fileName = message + ".txt";
 		PrintStream scriereFisier = null;
@@ -31,7 +32,7 @@ public class Utils {
 				for (Application application : applications) {
 
 					scriereFisier.println(application + "\n"
-							+ "------------------------------------------------------------------------------------------"
+							+ "__________________________________________________________________________________________"
 							+ "\n");
 				}
 			} catch (FileNotFoundException e) {
@@ -42,7 +43,7 @@ public class Utils {
 		}
 
 	}
-	
+
 	public Application parseRatingSection(String[] array) {
 //		String rating = array[0] + " " + array[1];
 //		String reviewsNumber = array[2];
@@ -71,5 +72,5 @@ public class Utils {
 		}
 		return new Application(reviewsNumber, rating, downloadsNumber, ageRating);
 	}
-	
+
 }

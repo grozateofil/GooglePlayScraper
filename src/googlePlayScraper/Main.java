@@ -2,6 +2,8 @@ package googlePlayScraper;
 
 import java.io.File;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +31,7 @@ public class Main {
 
 		Utils utils = new Utils();
 
-		String searchedWord = "fishing game";
+		String searchedWord = "Restaurant Cooking Chef";
 
 		ArrayList<Application> applications = new ArrayList<>();
 
@@ -124,9 +126,13 @@ public class Main {
 					ArrayList<String> arrayList = new ArrayList<>();
 					for (WebElement element : permDetails) {
 
+						String[] permissionsArray = null;
 						if (element.getText() != null)
 
-							arrayList.add(element.getText());
+							permissionsArray = element.getText().split("\n");
+						for (String permission : permissionsArray)
+							if (!permission.isEmpty())
+								arrayList.add(permission);
 					}
 
 					hashMap.put(name.getText(), arrayList);
@@ -149,11 +155,17 @@ public class Main {
 								.findElement(By.className("X5PpBb")).getText();
 						String starsNumber = element.findElement(By.className("Jx4nYe"))
 								.findElement(By.className("iXRFPc")).getAttribute("aria-label").split(" ")[1];
-						String reviewDate = element.findElement(By.className("Jx4nYe"))
+						String reviewOldDate = element.findElement(By.className("Jx4nYe"))
 								.findElement(By.cssSelector(".bp9Aid")).getText();
+
+						DateTimeFormatter parser = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+						LocalDate date = LocalDate.parse(reviewOldDate, parser);
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+						String reviewNewDate = date.format(formatter);
+
 						String textReview = element.findElement(By.className("h3YV2d")).getText();
 
-						Review review = new Review(author, starsNumber, reviewDate, textReview);
+						Review review = new Review(author, starsNumber, reviewNewDate, textReview);
 						reviews.add(review);
 					}
 				}
@@ -161,7 +173,7 @@ public class Main {
 				chromeDriver.navigate().back();
 				Thread.sleep(2000);
 
-				Application application = new Application(appName, appDeveloperName, appLink, null,
+				Application application = new Application(appName, appDeveloperName, appLink, appDescription,
 						reviews.size() > 0 ? reviews : null, utils.parseRatingSection(array).getReviewsNumeber(),
 						utils.parseRatingSection(array).getRating(),
 						utils.parseRatingSection(array).getDownloadsNumber(),
@@ -177,7 +189,7 @@ public class Main {
 
 			e.printStackTrace();
 		} finally {
-//			chromeDriver.quit();
+			chromeDriver.quit();
 		}
 		utils.saveInFolder(searchedWord, applications);
 
