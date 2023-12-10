@@ -1,12 +1,15 @@
 package googlePlayScraper;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -31,7 +34,7 @@ public class Main {
 
 		Utils utils = new Utils();
 
-		String searchedWord = "Restaurant Cooking Chef";
+		String searchedWord = "horse";
 
 		ArrayList<Application> applications = new ArrayList<>();
 
@@ -93,6 +96,7 @@ public class Main {
 						.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".w7Iutd")));
 
 				String[] array = ratingSection.getText().split("\n");
+
 
 				WebElement descriptionSection = wait
 						.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bARER")));
@@ -173,15 +177,20 @@ public class Main {
 				chromeDriver.navigate().back();
 				Thread.sleep(2000);
 
-				Application application = new Application(appName, appDeveloperName, appLink, appDescription,
-						reviews.size() > 0 ? reviews : null, utils.parseRatingSection(array).getReviewsNumeber(),
+				String currentDate = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+
+				System.out.println();
+				System.out.println();
+
+				Application application = new Application(currentDate, appName, appDeveloperName, appLink, appDescription,
+						reviews.size() > 0 ? reviews : null, utils.parseRatingSection(array).getReviewsNumber(),
 						utils.parseRatingSection(array).getRating(),
 						utils.parseRatingSection(array).getDownloadsNumber(),
 						utils.parseRatingSection(array).getAgeRating(), price, hashMap);
 
-				System.out.println(application + "\n\n");
 
 				applications.add(application);
+				
 
 			}
 
@@ -191,8 +200,9 @@ public class Main {
 		} finally {
 			chromeDriver.quit();
 		}
-		utils.saveInFolder(searchedWord, applications);
-
+//		utils.saveInFolder(searchedWord, applications);
+		utils.createExcel(applications, searchedWord);
+		
 	}
 
 }

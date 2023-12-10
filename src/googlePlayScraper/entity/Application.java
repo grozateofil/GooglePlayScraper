@@ -5,12 +5,13 @@ import java.util.HashMap;
 
 public class Application {
 
+	private String appScrappingDate;
 	private String name;
 	private String developer;
 	private String link;
 	private String description;
 	private ArrayList<Review> reviews;
-	private String reviewsNumeber;
+	private String reviewsNumber;
 	private String rating;
 	private String downloadsNumber;
 	private String ageRating;
@@ -21,6 +22,7 @@ public class Application {
 	 *
 	 * Constructor
 	 *
+	 * @param appScrappingDate
 	 * @param name
 	 * @param developer
 	 * @param link
@@ -33,16 +35,17 @@ public class Application {
 	 * @param price
 	 * @param permissions
 	 */
-	public Application(String name, String developer, String link, String description, ArrayList<Review> reviews,
-			String reviewsNumeber, String rating, String downloadsNumber, String ageRating, String price,
-			HashMap<String, ArrayList<String>> permissions) {
+	public Application(String appScrappingDate, String name, String developer, String link, String description,
+			ArrayList<Review> reviews, String reviewsNumber, String rating, String downloadsNumber, String ageRating,
+			String price, HashMap<String, ArrayList<String>> permissions) {
 		super();
+		this.appScrappingDate = appScrappingDate;
 		this.name = name;
 		this.developer = developer;
 		this.link = link;
 		this.description = description;
 		this.reviews = reviews;
-		this.reviewsNumeber = reviewsNumeber;
+		this.reviewsNumber = reviewsNumber;
 		this.rating = rating;
 		this.downloadsNumber = downloadsNumber;
 		this.ageRating = ageRating;
@@ -59,12 +62,26 @@ public class Application {
 	 * @param downloadsNumber
 	 * @param ageRating
 	 */
-	public Application(String reviewsNumeber, String rating, String downloadsNumber, String ageRating) {
+	public Application(String reviewsNumber, String rating, String downloadsNumber, String ageRating) {
 		super();
-		this.reviewsNumeber = reviewsNumeber;
+		this.reviewsNumber = reviewsNumber;
 		this.rating = rating;
 		this.downloadsNumber = downloadsNumber;
 		this.ageRating = ageRating;
+	}
+
+	/**
+	 * @return the appScrappingDate
+	 */
+	public String getAppScrappingDate() {
+		return appScrappingDate;
+	}
+
+	/**
+	 * @param appScrappingDate the appScrappingDate to set
+	 */
+	public void setAppScrappingDate(String appScrappingDate) {
+		this.appScrappingDate = appScrappingDate;
 	}
 
 	/**
@@ -140,15 +157,15 @@ public class Application {
 	/**
 	 * @return the reviewsNumeber
 	 */
-	public String getReviewsNumeber() {
-		return reviewsNumeber;
+	public String getReviewsNumber() {
+		return reviewsNumber;
 	}
 
 	/**
 	 * @param reviewsNumeber the reviewsNumeber to set
 	 */
-	public void setReviewsNumeber(String reviewsNumeber) {
-		this.reviewsNumeber = reviewsNumeber;
+	public void setReviewsNumber(String reviewsNumber) {
+		this.reviewsNumber = reviewsNumber;
 	}
 
 	/**
@@ -224,9 +241,9 @@ public class Application {
 	@Override
 	public String toString() {
 		return String.format(
-				"Name: %s\nDeveloper: %s\nRating: %s\nDownloads number: %s\nReviews number: %s\nAge rating: %s\nLink: %s\nDescription: %s\nReviews: %s\nPrice: %s\nPermissions: %s",
-				name, developer, rating, downloadsNumber, reviewsNumeber, ageRating, link, description, reviews, price,
-				permissions);
+				"Date: %s\nName: %s\nDeveloper: %s\nRating: %s\nDownloads number: %s\nReviews number: %s\nAge rating: %s\nLink: %s\nDescription: %s\nReviews: %s\nPrice: %s\nPermissions: %s",
+				appScrappingDate, name, developer, rating, downloadsNumber, reviewsNumber, ageRating, link,
+				description, reviews, price, permissions);
 	}
 
 }
