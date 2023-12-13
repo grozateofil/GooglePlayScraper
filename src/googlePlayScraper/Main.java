@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -21,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import googlePlayScraper.entity.Application;
 import googlePlayScraper.entity.Review;
+import googlePlayScraper.service.ApplicationService;
 import googlePlayScraper.util.Utils;
 
 public class Main {
@@ -34,9 +34,10 @@ public class Main {
 
 		Utils utils = new Utils();
 
-		String searchedWord = "horse";
+		String searchedWord = "horses";
 
 		ArrayList<Application> applications = new ArrayList<>();
+		ApplicationService applicationService = new ApplicationService();
 
 		chromeDriver.navigate().to("https://play.google.com/store/");
 		chromeDriver.manage().window();
@@ -96,7 +97,6 @@ public class Main {
 						.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".w7Iutd")));
 
 				String[] array = ratingSection.getText().split("\n");
-
 
 				WebElement descriptionSection = wait
 						.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bARER")));
@@ -179,18 +179,15 @@ public class Main {
 
 				String currentDate = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
 
-				System.out.println();
-				System.out.println();
-
-				Application application = new Application(currentDate, appName, appDeveloperName, appLink, appDescription,
-						reviews.size() > 0 ? reviews : null, utils.parseRatingSection(array).getReviewsNumber(),
-						utils.parseRatingSection(array).getRating(),
+				Application application = new Application(currentDate, appName, appDeveloperName, appLink,
+						appDescription, reviews.size() > 0 ? reviews : null,
+						utils.parseRatingSection(array).getReviewsNumber(), utils.parseRatingSection(array).getRating(),
 						utils.parseRatingSection(array).getDownloadsNumber(),
 						utils.parseRatingSection(array).getAgeRating(), price, hashMap);
 
+				System.out.println(application + "\n" + "\n");
 
 				applications.add(application);
-				
 
 			}
 
@@ -201,8 +198,11 @@ public class Main {
 			chromeDriver.quit();
 		}
 //		utils.saveInFolder(searchedWord, applications);
+
 		utils.createExcel(applications, searchedWord);
-		
+
+		applicationService.addApplication(applications);
+
 	}
 
 }

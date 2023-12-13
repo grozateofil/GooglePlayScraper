@@ -2,20 +2,57 @@ package googlePlayScraper.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "Applications")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Application {
 
+	@Id
+	@Column(name = "No")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int no;
+	@Column(name = "AppScrappingDate")
 	private String appScrappingDate;
+	@Column(name = "Name")
 	private String name;
+	@Column(name = "Developer")
 	private String developer;
+	@Column(name = "Link")
 	private String link;
+	@Column(name = "Description", columnDefinition = "LONGTEXT")
 	private String description;
-	private ArrayList<Review> reviews;
+	@OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE }, mappedBy = "application")
+	private List<Review> reviews;
+	@Column(name = "ReviewsNumber")
 	private String reviewsNumber;
+	@Column(name = "Rating")
 	private String rating;
+	@Column(name = "DownloadsNumber")
 	private String downloadsNumber;
+	@Column(name = "AgeRating")
 	private String ageRating;
+	@Column(name = "Price")
 	private String price;
+	@Column(name = "Permissions", columnDefinition = "LONGTEXT")
 	private HashMap<String, ArrayList<String>> permissions;
 
 	/**
@@ -36,7 +73,7 @@ public class Application {
 	 * @param permissions
 	 */
 	public Application(String appScrappingDate, String name, String developer, String link, String description,
-			ArrayList<Review> reviews, String reviewsNumber, String rating, String downloadsNumber, String ageRating,
+			List<Review> reviews, String reviewsNumber, String rating, String downloadsNumber, String ageRating,
 			String price, HashMap<String, ArrayList<String>> permissions) {
 		super();
 		this.appScrappingDate = appScrappingDate;
@@ -70,180 +107,12 @@ public class Application {
 		this.ageRating = ageRating;
 	}
 
-	/**
-	 * @return the appScrappingDate
-	 */
-	public String getAppScrappingDate() {
-		return appScrappingDate;
-	}
-
-	/**
-	 * @param appScrappingDate the appScrappingDate to set
-	 */
-	public void setAppScrappingDate(String appScrappingDate) {
-		this.appScrappingDate = appScrappingDate;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the developer
-	 */
-	public String getDeveloper() {
-		return developer;
-	}
-
-	/**
-	 * @param developer the developer to set
-	 */
-	public void setDeveloper(String developer) {
-		this.developer = developer;
-	}
-
-	/**
-	 * @return the link
-	 */
-	public String getLink() {
-		return link;
-	}
-
-	/**
-	 * @param link the link to set
-	 */
-	public void setLink(String link) {
-		this.link = link;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * @return the reviews
-	 */
-	public ArrayList<Review> getReviews() {
-		return reviews;
-	}
-
-	/**
-	 * @param reviews the reviews to set
-	 */
-	public void setReviews(ArrayList<Review> reviews) {
-		this.reviews = reviews;
-	}
-
-	/**
-	 * @return the reviewsNumeber
-	 */
-	public String getReviewsNumber() {
-		return reviewsNumber;
-	}
-
-	/**
-	 * @param reviewsNumeber the reviewsNumeber to set
-	 */
-	public void setReviewsNumber(String reviewsNumber) {
-		this.reviewsNumber = reviewsNumber;
-	}
-
-	/**
-	 * @return the rating
-	 */
-	public String getRating() {
-		return rating;
-	}
-
-	/**
-	 * @param rating the rating to set
-	 */
-	public void setRating(String rating) {
-		this.rating = rating;
-	}
-
-	/**
-	 * @return the downloadsNumber
-	 */
-	public String getDownloadsNumber() {
-		return downloadsNumber;
-	}
-
-	/**
-	 * @param downloadsNumber the downloadsNumber to set
-	 */
-	public void setDownloadsNumber(String downloadsNumber) {
-		this.downloadsNumber = downloadsNumber;
-	}
-
-	/**
-	 * @return the ageRating
-	 */
-	public String getAgeRating() {
-		return ageRating;
-	}
-
-	/**
-	 * @param ageRating the ageRating to set
-	 */
-	public void setAgeRating(String ageRating) {
-		this.ageRating = ageRating;
-	}
-
-	/**
-	 * @return the price
-	 */
-	public String getPrice() {
-		return price;
-	}
-
-	/**
-	 * @param price the price to set
-	 */
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	/**
-	 * @return the permissions
-	 */
-	public HashMap<String, ArrayList<String>> getPermissions() {
-		return permissions;
-	}
-
-	/**
-	 * @param permissions the permissions to set
-	 */
-	public void setPermissions(HashMap<String, ArrayList<String>> permissions) {
-		this.permissions = permissions;
-	}
-
 	@Override
 	public String toString() {
 		return String.format(
 				"Date: %s\nName: %s\nDeveloper: %s\nRating: %s\nDownloads number: %s\nReviews number: %s\nAge rating: %s\nLink: %s\nDescription: %s\nReviews: %s\nPrice: %s\nPermissions: %s",
-				appScrappingDate, name, developer, rating, downloadsNumber, reviewsNumber, ageRating, link,
-				description, reviews, price, permissions);
+				appScrappingDate, name, developer, rating, downloadsNumber, reviewsNumber, ageRating, link, description,
+				reviews, price, permissions);
 	}
 
 }

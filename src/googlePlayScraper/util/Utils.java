@@ -147,6 +147,9 @@ public class Utils {
 				Cell appReviews = row.createCell(5);
 				appReviews.setCellValue(application.getReviews() != null ? application.getReviews().stream()
 						.map(review -> review.toString() + "\n").collect(Collectors.joining(",")) : "");
+				
+//				Cell appReviews = row.createCell(5);
+//				appReviews.setCellValue(application.getReviews() != null ? application.getReviews(): "");
 
 				Cell appReviewsNumber = row.createCell(6);
 				appReviewsNumber.setCellValue(application.getReviewsNumber());
