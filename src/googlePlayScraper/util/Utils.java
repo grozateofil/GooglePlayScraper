@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import googlePlayScraper.entity.Application;
+import googlePlayScraper.entity.Permission;
 
 public class Utils {
 
@@ -124,7 +125,6 @@ public class Utils {
 			headerPermissionsCell.setCellValue("Permissions");
 			headerPermissionsCell.setCellStyle(cellStyle);
 
-			
 			XSSFRow row = null;
 			for (Application application : applications) {
 				row = spreadsheet.createRow(rowid++);
@@ -147,7 +147,7 @@ public class Utils {
 				Cell appReviews = row.createCell(5);
 				appReviews.setCellValue(application.getReviews() != null ? application.getReviews().stream()
 						.map(review -> review.toString() + "\n").collect(Collectors.joining(",")) : "");
-				
+
 //				Cell appReviews = row.createCell(5);
 //				appReviews.setCellValue(application.getReviews() != null ? application.getReviews(): "");
 
@@ -167,9 +167,11 @@ public class Utils {
 				appPrice.setCellValue(application.getPrice());
 
 				Cell appPermissions = row.createCell(11);
-				appPermissions.setCellValue(application.getPermissions() != null ? application.getPermissions()
-						.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue())
-						.collect(Collectors.joining(", \n")) : "");
+//				appPermissions.setCellValue(application.getPermissions() != null ? application.getPermissions()
+//						.entrySet().stream().map(entry -> entry.getKey() + ": " + entry.getValue())
+//						.collect(Collectors.joining(", \n")) : "");
+				appPermissions.setCellValue(application.getPermissions() != null ? application.getPermissions().stream()
+						.map(Permission::toString).collect(Collectors.joining(";")) : "");
 
 			}
 

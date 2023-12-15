@@ -28,8 +28,9 @@
 		<property name="hibernate.dbcp.maxWaitMillis">-1</property>
 		
 		<!-- Mapping entities -->
-		
+
 		<mapping class="googlePlayScraper.entity.Application" />
+		<mapping class="googlePlayScraper.entity.Permission" />
 		<mapping class="googlePlayScraper.entity.Review" />
 	
 	</session-factory>

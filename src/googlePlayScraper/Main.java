@@ -8,7 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,6 +21,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import googlePlayScraper.entity.Application;
+import googlePlayScraper.entity.Permission;
 import googlePlayScraper.entity.Review;
 import googlePlayScraper.service.ApplicationService;
 import googlePlayScraper.util.Utils;
@@ -120,25 +123,29 @@ public class Main {
 						.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".xNUmN")));
 
 				List<WebElement> permissionsNameList = permissions.findElements(By.className("BlLrjc"));
-				HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
+				HashMap<String, LinkedList<String>> hashMap = new HashMap<>();
+				List<Permission> permissionsList = new ArrayList<>();
 				for (WebElement permissionName : permissionsNameList) {
 
 					WebElement name = permissionName.findElement(By.className("B4wkv"))
 							.findElement(By.className("aPeBBe"));
 
 					List<WebElement> permDetails = permissionName.findElements(By.className("dnM39b"));
-					ArrayList<String> arrayList = new ArrayList<>();
+					LinkedList<String> arrayList = new LinkedList<>();
+					Permission permis = new Permission();
 					for (WebElement element : permDetails) {
 
 						String[] permissionsArray = null;
 						if (element.getText() != null)
 
 							permissionsArray = element.getText().split("\n");
-						for (String permission : permissionsArray)
+						for (String permission : permissionsArray) {
 							if (!permission.isEmpty())
 								arrayList.add(permission);
+						}
+						permis = new Permission(name.getText(), arrayList.stream().collect(Collectors.joining("; ")));
 					}
-
+					permissionsList.add(permis);
 					hashMap.put(name.getText(), arrayList);
 				}
 
@@ -183,11 +190,12 @@ public class Main {
 						appDescription, reviews.size() > 0 ? reviews : null,
 						utils.parseRatingSection(array).getReviewsNumber(), utils.parseRatingSection(array).getRating(),
 						utils.parseRatingSection(array).getDownloadsNumber(),
-						utils.parseRatingSection(array).getAgeRating(), price, hashMap);
+						utils.parseRatingSection(array).getAgeRating(), price, permissionsList);
 
 				System.out.println(application + "\n" + "\n");
 
 				applications.add(application);
+				applicationService.addApplication(application);
 
 			}
 
@@ -201,7 +209,7 @@ public class Main {
 
 		utils.createExcel(applications, searchedWord);
 
-		applicationService.addApplication(applications);
+//		applicationService.addApplication(applications);
 
 	}
 

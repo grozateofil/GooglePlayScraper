@@ -1,7 +1,5 @@
 package googlePlayScraper.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,9 +25,9 @@ import lombok.Setter;
 public class Application {
 
 	@Id
-	@Column(name = "No")
+	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int no;
+	private int id;
 	@Column(name = "AppScrappingDate")
 	private String appScrappingDate;
 	@Column(name = "Name")
@@ -52,8 +50,18 @@ public class Application {
 	private String ageRating;
 	@Column(name = "Price")
 	private String price;
-	@Column(name = "Permissions", columnDefinition = "LONGTEXT")
-	private HashMap<String, ArrayList<String>> permissions;
+//	@Column(name = "Permissions", columnDefinition = "LONGTEXT")
+//	private HashMap<String, ArrayList<String>> permissions;
+
+	@OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE }, mappedBy = "application")
+	private List<Permission> permissions;
+
+
+//	@ManyToMany(mappedBy = "application")
+//	@ManyToMany(cascade = { CascadeType.ALL })
+//	@JoinTable(name = "Application_Permissions", joinColumns = {
+//			@JoinColumn(name = "application_id") }, inverseJoinColumns = { @JoinColumn(name = "permission_id") })
+//	private List<Permission> permissions;
 
 	/**
 	 *
@@ -74,7 +82,7 @@ public class Application {
 	 */
 	public Application(String appScrappingDate, String name, String developer, String link, String description,
 			List<Review> reviews, String reviewsNumber, String rating, String downloadsNumber, String ageRating,
-			String price, HashMap<String, ArrayList<String>> permissions) {
+			String price, List<Permission> permissions) {
 		super();
 		this.appScrappingDate = appScrappingDate;
 		this.name = name;

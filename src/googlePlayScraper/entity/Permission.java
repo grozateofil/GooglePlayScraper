@@ -16,25 +16,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Reviews")
+@Table(name = "Permissions")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Review {
+public class Permission {
 
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "Author")
-	private String author;
-	@Column(name = "StarsNumber")
-	private String starsNumber;
-	@Column(name = "Date")
-	private String date;
-	@Column(name = "Review", columnDefinition = "LONGTEXT")
-	private String review;
+	@Column(name = "PermissionName")
+	private String permissionName;
+
+	@Column(name = "PermissionDescription", columnDefinition = "LONGTEXT")
+	private String permissionDescription;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Application application;
 
@@ -42,23 +40,19 @@ public class Review {
 	 *
 	 * Constructor
 	 *
-	 * @param author
-	 * @param starsNumber
-	 * @param date
-	 * @param review
+	 * @param permissionName
+	 * @param permissionDescription
 	 */
-	public Review(String author, String starsNumber, String date, String review) {
+	public Permission(String permissionName, String permissionDescription) {
 		super();
-		this.author = author;
-		this.starsNumber = starsNumber;
-		this.date = date;
-		this.review = review;
+		this.permissionName = permissionName;
+		this.permissionDescription = permissionDescription;
 	}
 
 	@Override
 	public String toString() {
-
-		return String.format("Author: %s \nStars number: %s \nDate: %s \nReview: %s \n", author, starsNumber, date, review);
+		return String.format("Permission name: %s \nPermission description: %s \n", permissionName,
+				permissionDescription);
 	}
 
 }
