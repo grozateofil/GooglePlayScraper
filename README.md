@@ -10,7 +10,7 @@
 ```shell
 https://github.com/grozateofil/GooglePlayScraper.git
 ```
-Note: If you don't know to clone a project from github, please follow the instructions: [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+*Note: If you don't know to clone a project from github, please follow the instructions: [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
 2️⃣ Import the project to Eclipse:
 
