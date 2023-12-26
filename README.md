@@ -9,6 +9,7 @@
 1️⃣ Clone the code to your PC:
 ```shell
 https://github.com/grozateofil/GooglePlayScraper.git
+```
 2️⃣ Import the project to Eclipse:
 File -> Import -> General -> 
 
