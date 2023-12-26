@@ -6,6 +6,13 @@
 </em>
 
 ## Getting Started
+1️⃣ If you want to save data in SQL database, install XAMPP from [here](https://www.apachefriends.org/download.html).
+
+After the XAMPP is installed, open XAMPP Control Panel and start <b>Apache</b> and <b>MySQL</b>
+
+![image](https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1)
+
+
 1️⃣ Clone the code to your PC:
 ```shell
 https://github.com/grozateofil/GooglePlayScraper.git
