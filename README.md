@@ -9,9 +9,10 @@
 1️⃣ If you want to save data in SQL database, install XAMPP from [here](https://www.apachefriends.org/download.html).
 
 After the XAMPP is installed, open XAMPP Control Panel and start <b>Apache</b> and <b>MySQL</b>
-<div align="center" style="margin-top: 0;">
-![image](https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1)
-</div>
+
+<p align="center">
+  <img src="[http://some_place.com/image.png](https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1)" />
+</p>
 
 1️⃣ Clone the code to your PC:
 ```shell
