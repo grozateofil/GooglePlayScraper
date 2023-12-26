@@ -29,11 +29,13 @@ public class Utils {
 	public void saveInFolder(String searchedWord, ArrayList<Application> applications) {
 
 		String folderName = searchedWord;
-		String dayFolder = new SimpleDateFormat("ddMMyyyy").format(new Date());
-		String message = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
-		File folder = new File(parentFolder + "/" + dayFolder + "/" + folderName);
+
+		String currentDate = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+		File folder = new File(parentFolder + "/" + "TextFiles" + "/"
+				+ new SimpleDateFormat("MM_yyyy").format(new Date()) + "/" + folderName);
 		folder.mkdirs();
-		String fileName = message + ".txt";
+		
+		String fileName = currentDate + ".txt";
 		PrintStream scriereFisier = null;
 
 		File fisier = new File(folder, fileName);
@@ -55,7 +57,7 @@ public class Utils {
 		}
 	}
 
-	public void createExcel(ArrayList<Application> applications, String searchedWord) {
+	public void createExcel(String searchedWord, ArrayList<Application> applications) {
 
 		String currentDate = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
 		File folder = new File(

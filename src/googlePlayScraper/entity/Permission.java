@@ -51,7 +51,7 @@ public class Permission {
 
 	@Override
 	public String toString() {
-		return String.format("Permission name: %s \nPermission description: %s \n", permissionName,
+		return String.format("Name: %s \nDescription: %s \n", permissionName,
 				permissionDescription);
 	}
 

@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
@@ -23,24 +25,69 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import googlePlayScraper.entity.Application;
 import googlePlayScraper.entity.Permission;
 import googlePlayScraper.entity.Review;
-import googlePlayScraper.service.ApplicationService;
 import googlePlayScraper.util.Utils;
 
 public class Main {
 
 	public static void main(String[] args) {
-
+		Scanner scanner = new Scanner(System.in);
 		String driverPath = new File("Driver/chromedriver-win64/chromedriver.exe").getAbsolutePath();
+		Utils utils = new Utils();
+
+		String category = "";
+		int option = -1;
+		String saveToSQL = "";
+
+		while (category.isEmpty()) {
+			System.out.print("ENTER THE APPLICATIONS CATEGORY: ");
+			category = scanner.nextLine().trim();
+
+			if (category.isEmpty()) {
+				System.err.println("The category can't be empty. Please enter a valid category!\n");
+			}
+		}
+
+		while (option != 0 && option != 1 && option != 2) {
+			System.out.println("IN WHAT TYPE OF FILE DO YOU WANT THE DATA TO BE SAVED?");
+			System.out.println("0. Without save to file ");
+			System.out.println("1. Text file (.txt)");
+			System.out.println("2. Excel file (.xlsx)\n");
+			System.out.print("ENTER THE NUMBER OF CHOSEN OPTION: ");
+			try {
+				option = scanner.nextInt();
+			} catch (InputMismatchException e) {
+				scanner.next();
+			}
+
+			if (option != 0 && option != 1 && option != 2) {
+				System.err.println("The entered option not exists. Please enter a valid option!\n");
+			}
+
+		}
+
+		while (saveToSQL.isEmpty() || (!saveToSQL.equals("1") && !saveToSQL.equals("2"))) {
+			System.out.println("Do you want to save data in SQL database?");
+			System.out.println("1. Yes");
+			System.out.println("2. No");
+			System.out.print("ENTER THE NUMBER OF CHOSEN OPTION: ");
+			saveToSQL = scanner.next().trim();
+
+			if (saveToSQL.isEmpty()) {
+				System.err.println("The option can't be empty. Please enter a valid option!\n");
+			}
+
+			if (!saveToSQL.equals("1") && !saveToSQL.equals("2")) {
+				System.err.println("The entered option not exists. Please enter a valid option!\n");
+			}
+
+		}
+
+		scanner.close();
 
 		System.setProperty("webdriver.chrome.driver", driverPath);
 		WebDriver chromeDriver = new ChromeDriver();
-
-		Utils utils = new Utils();
-
-		String searchedWord = "horses";
-
 		ArrayList<Application> applications = new ArrayList<>();
-		ApplicationService applicationService = new ApplicationService();
+//		ApplicationService applicationService = new ApplicationService();
 
 		chromeDriver.navigate().to("https://play.google.com/store/");
 		chromeDriver.manage().window();
@@ -51,7 +98,7 @@ public class Main {
 		WebElement searchBar = new WebDriverWait(chromeDriver, Duration.ofSeconds(10))
 				.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".HWAcU")));
 
-		searchBar.sendKeys(searchedWord + Keys.ENTER);
+		searchBar.sendKeys(category + Keys.ENTER);
 
 		try {
 
@@ -195,7 +242,7 @@ public class Main {
 				System.out.println(application + "\n" + "\n");
 
 				applications.add(application);
-				applicationService.addApplication(application);
+//				applicationService.addApplication(application);
 
 			}
 
@@ -205,9 +252,14 @@ public class Main {
 		} finally {
 			chromeDriver.quit();
 		}
-//		utils.saveInFolder(searchedWord, applications);
 
-		utils.createExcel(applications, searchedWord);
+		if (option == 1)
+			utils.saveInFolder(category, applications);
+		else if (option == 2)
+			utils.createExcel(category, applications);
+		else {
+			System.err.println("The data wasn't saved in file!");
+		}
 
 //		applicationService.addApplication(applications);
 
