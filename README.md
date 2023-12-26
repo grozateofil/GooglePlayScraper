@@ -35,6 +35,6 @@ Go to Main -> Press <b>Run Main</b>.
 </p>
 
 ### Need help?
-[![ask github]](https://github.com/grozateofil/GooglePlayScraper/discussions)
+[![image](https://github.com/grozateofil/GooglePlayScraper/assets/61622781/e645800d-e57b-40b2-b097-067dc983cb8b)](https://github.com/grozateofil/GooglePlayScraper/discussions)
 
 
