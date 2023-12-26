@@ -37,6 +37,6 @@ Go to Main -> Press <b>Run Main</b>.
 ### Need help?
 <p align="left">
   <a href="https://github.com/grozateofil/GooglePlayScraper/discussions">
-   <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1" width="100" height="100"/>
+   <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/4c97cdb3-9917-48aa-9616-c37cf73c4aa7" width="100" height="100"/>
   </a>
 </p>
