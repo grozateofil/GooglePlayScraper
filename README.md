@@ -35,6 +35,6 @@ Go to Main -> Press <b>Run Main</b>.
 </p>
 
 ### Need help?
-e-mail: groza.teofil15@gmail.com
+[e-mail: groza.teofil15@gmail.com](https://github.com/grozateofil/GooglePlayScraper/discussions)https://github.com/grozateofil/GooglePlayScraper/discussions
 
 
