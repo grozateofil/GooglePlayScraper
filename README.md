@@ -18,3 +18,6 @@ File -> Import -> General -> Import Projects from File System or Archive -> Sele
 
 Go to Main -> Press <b>Run Main</b>
 
+![image](https://github.com/grozateofil/GooglePlayScraper/assets/61622781/b632ac03-66a7-4fde-9037-360fd3e3c1f9)
+
+
