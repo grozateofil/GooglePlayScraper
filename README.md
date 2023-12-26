@@ -8,7 +8,7 @@
 ## Getting Started
 1️⃣ If you want to save data in SQL database, install XAMPP from [here](https://www.apachefriends.org/download.html).
 
-After the XAMPP is installed, open XAMPP Control Panel and start <b>Apache</b> and <b>MySQL</b>
+After the XAMPP is installed, open XAMPP Control Panel and start <b>Apache</b> and <b>MySQL</b>.
 
 <p align="center">
   <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1" width="500" height="300"/>
@@ -24,12 +24,14 @@ https://github.com/grozateofil/GooglePlayScraper.git
 
 3️⃣ Import the project to Eclipse:
 
-File -> Import -> General -> Import Projects from File System or Archive -> Select the project directory 
+File -> Import -> General -> Import Projects from File System or Archive -> Select the project directory .
 
 4️⃣ Run the program:
 
-Go to Main -> Press <b>Run Main</b>
+Go to Main -> Press <b>Run Main</b>.
 
-![image](https://github.com/grozateofil/GooglePlayScraper/assets/61622781/b632ac03-66a7-4fde-9037-360fd3e3c1f9)
+<p align="center">
+   <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/b632ac03-66a7-4fde-9037-360fd3e3c1f9"/>
+</p>
 
 
