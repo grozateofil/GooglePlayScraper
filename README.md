@@ -11,7 +11,7 @@
 After the XAMPP is installed, open XAMPP Control Panel and start <b>Apache</b> and <b>MySQL</b>
 
 <p align="center">
-  <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1" />
+  <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1" width="500" height="300"/>
 </p>
 
 1️⃣ Clone the code to your PC:
