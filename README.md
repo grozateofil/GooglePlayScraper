@@ -11,5 +11,7 @@
 https://github.com/grozateofil/GooglePlayScraper.git
 ```
 2️⃣ Import the project to Eclipse:
-File -> Import -> General -> 
+File -> Import -> General -> Import Projects from File System or Archive -> Select the project directory 
+3️⃣ Run the program:
+Go to Main -> Press <b>Run Main</b>
 
