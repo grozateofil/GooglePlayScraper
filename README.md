@@ -14,17 +14,19 @@ After the XAMPP is installed, open XAMPP Control Panel and start <b>Apache</b> a
   <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/a17b1d74-c487-4bf4-944a-9a676c199af1" width="500" height="300"/>
 </p>
 
-1️⃣ Clone the code to your PC:
+Click to MySQL Admin and create a database with the name: <b>google_play_scraper</b>.
+
+2️⃣ Clone the code to your PC:
 ```shell
 https://github.com/grozateofil/GooglePlayScraper.git
 ```
 *Note: If you don't know to clone a project from GitHub, please follow the instructions: [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).*
 
-2️⃣ Import the project to Eclipse:
+3️⃣ Import the project to Eclipse:
 
 File -> Import -> General -> Import Projects from File System or Archive -> Select the project directory 
 
-3️⃣ Run the program:
+4️⃣ Run the program:
 
 Go to Main -> Press <b>Run Main</b>
 
