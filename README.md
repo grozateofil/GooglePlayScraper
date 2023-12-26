@@ -34,4 +34,7 @@ Go to Main -> Press <b>Run Main</b>.
    <img src="https://github.com/grozateofil/GooglePlayScraper/assets/61622781/b632ac03-66a7-4fde-9037-360fd3e3c1f9"/>
 </p>
 
+### Need help?
+e-mail: groza.teofil15@gmail.com
+
 
