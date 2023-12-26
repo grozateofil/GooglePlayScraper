@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import googlePlayScraper.entity.Application;
 import googlePlayScraper.entity.Permission;
 import googlePlayScraper.entity.Review;
+import googlePlayScraper.service.ApplicationService;
 import googlePlayScraper.util.Utils;
 
 public class Main {
@@ -33,6 +34,7 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		String driverPath = new File("Driver/chromedriver-win64/chromedriver.exe").getAbsolutePath();
 		Utils utils = new Utils();
+		ApplicationService applicationService = null;
 
 		String category = "";
 		int option = -1;
@@ -79,7 +81,6 @@ public class Main {
 			if (!saveToSQL.equals("1") && !saveToSQL.equals("2")) {
 				System.err.println("The entered option not exists. Please enter a valid option!\n");
 			}
-
 		}
 
 		scanner.close();
@@ -87,7 +88,9 @@ public class Main {
 		System.setProperty("webdriver.chrome.driver", driverPath);
 		WebDriver chromeDriver = new ChromeDriver();
 		ArrayList<Application> applications = new ArrayList<>();
-//		ApplicationService applicationService = new ApplicationService();
+		if (saveToSQL.equals("1")) {
+			applicationService = new ApplicationService();
+		}
 
 		chromeDriver.navigate().to("https://play.google.com/store/");
 		chromeDriver.manage().window();
@@ -242,7 +245,10 @@ public class Main {
 				System.out.println(application + "\n" + "\n");
 
 				applications.add(application);
-//				applicationService.addApplication(application);
+				
+				if (saveToSQL.equals("1")) {
+					applicationService.addApplication(application);
+				}
 
 			}
 
@@ -260,9 +266,6 @@ public class Main {
 		else {
 			System.err.println("The data wasn't saved in file!");
 		}
-
-//		applicationService.addApplication(applications);
-
 	}
 
 }
