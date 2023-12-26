@@ -8,4 +8,5 @@
 ## Getting Started
 1️⃣ Clone the code to your PC:
 ```shell
+https://github.com/grozateofil/GooglePlayScraper.git
 
